@@ -1,21 +1,23 @@
-int led1 = LED_BUILTIN;
+// Morse Code Display using LED and Button
 
-int buttonPin = 2; // Push button for resetting the name
-bool isButtonPressed = false;
+// Pin assignments
+int led1 = LED_BUILTIN;   // LED connected to the built-in LED pin
+int buttonPin = 2;        // Push button for resetting the name
+bool isButtonPressed = false; // Flag to indicate if the button is pressed
 
 void setup() {
-  pinMode(led1, OUTPUT);
-  pinMode(buttonPin, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(buttonPin), resetName, FALLING);
+  pinMode(led1, OUTPUT);   // Set LED pin as an output
+  pinMode(buttonPin, INPUT_PULLUP); // Set button pin as an input with pull-up resistor
+  attachInterrupt(digitalPinToInterrupt(buttonPin), resetName, FALLING); // Attach interrupt to button pin
 }
 
-void loop() 
-{
+void loop() {
   if (isButtonPressed) {
-    resetName();
-    isButtonPressed = false;
+    resetName();          // Call resetName function if the button is pressed
+    isButtonPressed = false; // Reset the button press flag
   }
 
+  // Display "Prabhjot" in Morse code
   // P (.--.)
   blinkDot(); delay(500);
   blinkDash(); delay(500);
@@ -63,14 +65,14 @@ void loop()
 
   delay(2000);  // Gap between words
 }
-
+// Function to blink a dot
 void blinkDot() {
   digitalWrite(led1, HIGH);
   delay(200);
   digitalWrite(led1, LOW);
   delay(200);
 }
-
+// Function to blink a dash
 void blinkDash() {
   digitalWrite(led1, HIGH);
   delay(600);
